@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+// in src/App.js
+import * as React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { Admin, Resource } from "react-admin";
+import jsonServerProvider from "ra-data-json-server";
+import {
+    FuncionarioCreate,
+    FuncionarioEdit,
+    FuncionarioList,
+} from "./Funcionario";
 
+import { AnimalCreate, AnimalEdit, AnimalList } from "./Animal";
+
+import { BaiaCreate, BaiaEdit, BaiaList } from "./Baia";
+
+const dataProvider = jsonServerProvider("http://localhost:8080");
+
+const App = () => (
+    <Admin dataProvider={dataProvider}>
+        <Resource
+            name="funcionario"
+            list={FuncionarioList}
+            create={FuncionarioCreate}
+            edit={FuncionarioEdit}
+        />
+        <Resource
+            name="animal"
+            list={AnimalList}
+            create={AnimalCreate}
+            edit={AnimalEdit}
+        />
+        <Resource
+            name="baia"
+            list={BaiaList}
+            create={BaiaCreate}
+            edit={BaiaEdit}
+        />
+    </Admin>
+);
 export default App;
